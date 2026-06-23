@@ -5,109 +5,145 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trainiac — Initiative Tracker</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --purple-dark:  #1B1340;
-      --purple-mid:   #5B4191;
-      --purple-main:  #A880FF;
-      --purple-light: #DDCCFF;
-      --magenta:      #F2469B;
-      --magenta-dark: #590931;
-      --lime:         #DCFF79;
-      --black:        #1D101F;
-      --off-white:    #FBF8EC;
-      --off-s1:       #F6EDDF;
-      --off-s2:       #ECE0CD;
-      --muted:        #6B6073;
-      --border:       #E8DFD0;
-
-      --status-done-bg:     #d1fae5; --status-done-fg:     #065f46;
-      --status-progress-bg: #dbeafe; --status-progress-fg: #1e40af;
-      --status-review-bg:   #ede9fe; --status-review-fg:   #4c1d95;
-      --status-testing-bg:  #fef9c3; --status-testing-fg:  #713f12;
-      --status-release-bg:  #cffafe; --status-release-fg:  #0c4a6e;
-      --status-todo-bg:     #f3f4f6; --status-todo-fg:     #374151;
-      --status-blocked-bg:  #fee2e2; --status-blocked-fg:  #991b1b;
+    *{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --purple-dark:#1B1340;--purple-mid:#5B4191;--purple-main:#A880FF;--purple-light:#DDCCFF;
+      --magenta:#F2469B;--magenta-dark:#590931;--lime:#DCFF79;
+      --black:#1D101F;--off-white:#FBF8EC;--off-s1:#F6EDDF;--off-s2:#ECE0CD;
+      --muted:#6B6073;--border:#E8DFD0;
+      --done-bg:#d1fae5;--done-fg:#065f46;
+      --prog-bg:#dbeafe;--prog-fg:#1e40af;
+      --review-bg:#ede9fe;--review-fg:#4c1d95;
+      --test-bg:#fef9c3;--test-fg:#713f12;
+      --rel-bg:#cffafe;--rel-fg:#0c4a6e;
+      --todo-bg:#f3f4f6;--todo-fg:#374151;
+      --block-bg:#fee2e2;--block-fg:#991b1b;
     }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--off-white); color: var(--black); min-height: 100vh; font-size: 14px; line-height: 1.5; }
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--off-white);color:var(--black);font-size:14px;line-height:1.5}
 
     /* Header */
-    .header { background: var(--purple-dark); color: white; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; z-index: 50; }
-    .header-left { display: flex; align-items: center; gap: 14px; }
-    .brand-mark { width: 32px; height: 32px; background: var(--magenta); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; color: white; }
-    .header h1 { font-size: 16px; font-weight: 700; letter-spacing: -0.3px; }
-    .header-sub { font-size: 12px; color: var(--purple-light); margin-top: 1px; }
-    .last-sync { font-size: 12px; color: var(--purple-light); }
+    .header{background:var(--purple-dark);color:white;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:50}
+    .header-left{display:flex;align-items:center;gap:14px}
+    .brand-mark{width:32px;height:32px;background:var(--magenta);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:white;flex-shrink:0}
+    .header h1{font-size:16px;font-weight:700;letter-spacing:-.3px}
+    .header-sub{font-size:12px;color:var(--purple-light);margin-top:1px}
+    .last-sync{font-size:12px;color:var(--purple-light)}
 
-    /* Layout */
-    .container { max-width: 1100px; margin: 0 auto; padding: 28px 24px; }
+    .container{max-width:1160px;margin:0 auto;padding:28px 24px}
 
     /* Summary bar */
-    .summary-bar { display: flex; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
-    .summary-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 14px 20px; flex: 1; min-width: 140px; }
-    .summary-card .num { font-size: 28px; font-weight: 800; letter-spacing: -1px; }
-    .summary-card .label { font-size: 12px; color: var(--muted); margin-top: 2px; }
-    .summary-card.highlight { background: var(--purple-dark); color: white; }
-    .summary-card.highlight .label { color: var(--purple-light); }
+    .summary-bar{display:flex;gap:12px;margin-bottom:32px;flex-wrap:wrap}
+    .sc{background:white;border:1px solid var(--border);border-radius:10px;padding:14px 16px;flex:1;min-width:100px}
+    .sc.hi{background:var(--purple-dark);color:white}
+    .sc .num{font-size:28px;font-weight:800;letter-spacing:-1px}
+    .sc .lbl{font-size:11px;color:var(--muted);margin-top:2px;text-transform:uppercase;letter-spacing:.4px}
+    .sc.hi .lbl{color:var(--purple-light)}
 
-    /* Initiatives */
-    .section { margin-bottom: 32px; }
-    .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
-    .section-title { font-size: 16px; font-weight: 700; }
-    .section-badge { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 20px; }
+    /* Initiative card */
+    .initiative{background:white;border:1px solid var(--border);border-radius:14px;margin-bottom:24px;overflow:hidden}
+    .init-header{padding:20px 24px 16px;display:flex;gap:20px;align-items:flex-start;justify-content:space-between;border-bottom:1px solid var(--border)}
+    .init-title{font-size:17px;font-weight:800;letter-spacing:-.3px}
+    .init-meta{font-size:12px;color:var(--muted);margin-top:3px}
+    .init-badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;margin-left:10px;vertical-align:middle}
 
-    /* Cards */
-    .initiative-card { background: white; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px; overflow: hidden; }
-    .card-header { padding: 16px 20px 12px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
-    .card-title { font-size: 15px; font-weight: 700; }
-    .card-meta { font-size: 12px; color: var(--muted); margin-top: 3px; }
-    .card-progress { flex-shrink: 0; text-align: right; }
-    .progress-bar-wrap { width: 120px; height: 6px; background: var(--border); border-radius: 3px; margin-top: 4px; }
-    .progress-bar { height: 6px; border-radius: 3px; background: var(--magenta); }
-    .progress-pct { font-size: 11px; color: var(--muted); }
+    /* Lifecycle track */
+    .lifecycle{display:grid;grid-template-columns:repeat(5,1fr);border-bottom:1px solid var(--border)}
+    .lc-cell{padding:14px 16px;border-right:1px solid var(--border);position:relative}
+    .lc-cell:last-child{border-right:none}
+    .lc-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:8px}
+    .lc-status{font-size:12px;font-weight:600}
+    .lc-detail{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.4}
+    .lc-bar{height:4px;border-radius:2px;margin-top:10px}
+    .lc-bar.done{background:var(--done-fg)}
+    .lc-bar.partial{background:var(--test-fg)}
+    .lc-bar.none{background:var(--border)}
 
-    /* Ticket table */
-    .ticket-list { border-top: 1px solid var(--border); }
-    .ticket-row { display: grid; grid-template-columns: 110px 1fr 160px 140px; gap: 12px; align-items: center; padding: 10px 20px; border-bottom: 1px solid var(--off-s1); font-size: 13px; }
-    .ticket-row:last-child { border-bottom: none; }
-    .ticket-row:hover { background: var(--off-white); }
-    .ticket-key { font-family: monospace; font-size: 12px; font-weight: 600; color: var(--purple-mid); text-decoration: none; }
-    .ticket-key:hover { color: var(--magenta); }
-    .ticket-summary { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .ticket-assignee { color: var(--muted); font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .col-headers { display: grid; grid-template-columns: 110px 1fr 160px 140px; gap: 12px; padding: 8px 20px; border-top: 1px solid var(--border); background: var(--off-s1); font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    /* Metrics row */
+    .metrics-row{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border)}
+    .metric-cell{padding:14px 16px;border-right:1px solid var(--border)}
+    .metric-cell:last-child{border-right:none}
+    .metric-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:4px}
+    .metric-val{font-size:22px;font-weight:800;letter-spacing:-1px}
+    .metric-val.na{font-size:14px;color:var(--muted);font-weight:400}
+    .metric-sub{font-size:11px;color:var(--muted);margin-top:2px}
+    .metric-trend{font-size:11px;font-weight:600;margin-top:2px}
+    .metric-trend.up{color:var(--done-fg)}
+    .metric-trend.warn{color:#b45309}
+    .metric-trend.na{color:var(--muted)}
+
+    /* Rollout bar */
+    .rollout-row{padding:14px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+    .rollout-label{font-size:12px;font-weight:700;min-width:80px}
+    .rollout-stages{display:flex;gap:8px;flex:1;flex-wrap:wrap}
+    .rollout-stage{display:flex;align-items:center;gap:6px;font-size:12px}
+    .stage-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+    .stage-dot.done{background:var(--done-fg)}
+    .stage-dot.active{background:var(--magenta)}
+    .stage-dot.pending{background:var(--border)}
+    .rollout-pct{font-size:13px;font-weight:800;color:var(--magenta);min-width:40px;text-align:right}
+
+    /* Ticket list */
+    .section-toggle{padding:12px 24px;font-size:12px;font-weight:700;color:var(--purple-mid);cursor:pointer;user-select:none;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border)}
+    .section-toggle:hover{background:var(--off-s1)}
+    .ticket-section{border-bottom:1px solid var(--border)}
+    .col-heads{display:grid;grid-template-columns:110px 1fr 170px 150px;gap:8px;padding:8px 24px;background:var(--off-s1);font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+    .ticket-row{display:grid;grid-template-columns:110px 1fr 170px 150px;gap:8px;align-items:center;padding:10px 24px;border-bottom:1px solid var(--off-s1);font-size:13px}
+    .ticket-row:last-child{border-bottom:none}
+    .ticket-row:hover{background:var(--off-white)}
+    .tk{font-family:monospace;font-size:11px;font-weight:700;color:var(--purple-mid);text-decoration:none}
+    .tk:hover{color:var(--magenta)}
+    .ts{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .ta{color:var(--muted);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
     /* Status badges */
-    .status { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
-    .s-done       { background: var(--status-done-bg);     color: var(--status-done-fg); }
-    .s-progress   { background: var(--status-progress-bg); color: var(--status-progress-fg); }
-    .s-review     { background: var(--status-review-bg);   color: var(--status-review-fg); }
-    .s-testing    { background: var(--status-testing-bg);  color: var(--status-testing-fg); }
-    .s-release    { background: var(--status-release-bg);  color: var(--status-release-fg); }
-    .s-todo       { background: var(--status-todo-bg);     color: var(--status-todo-fg); }
-    .s-blocked    { background: var(--status-blocked-bg);  color: var(--status-blocked-fg); }
-    .s-deferred   { background: var(--off-s2);             color: var(--muted); }
+    .s{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;white-space:nowrap}
+    .s-done    {background:var(--done-bg);color:var(--done-fg)}
+    .s-prog    {background:var(--prog-bg);color:var(--prog-fg)}
+    .s-review  {background:var(--review-bg);color:var(--review-fg)}
+    .s-test    {background:var(--test-bg);color:var(--test-fg)}
+    .s-rel     {background:var(--rel-bg);color:var(--rel-fg)}
+    .s-todo    {background:var(--todo-bg);color:var(--todo-fg)}
+    .s-block   {background:var(--block-bg);color:var(--block-fg)}
+    .s-def     {background:var(--off-s2);color:var(--muted)}
+    .s-pend    {background:#fef3c7;color:#92400e}
 
     /* Blockers */
-    .blocker-list { padding: 12px 20px; border-top: 1px solid var(--border); background: #fff8f8; }
-    .blocker-item { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; margin-bottom: 6px; color: #991b1b; }
-    .blocker-item:last-child { margin-bottom: 0; }
+    .blockers{padding:12px 24px;background:#fff8f8;border-top:1px solid #fecaca}
+    .blocker-item{display:flex;gap:8px;font-size:13px;margin-bottom:5px;color:#991b1b}
+    .blocker-item:last-child{margin-bottom:0}
 
     /* Changelog */
-    .changelog { background: white; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-    .changelog-entry { padding: 14px 20px; border-bottom: 1px solid var(--off-s1); display: flex; gap: 16px; }
-    .changelog-entry:last-child { border-bottom: none; }
-    .cl-date { font-size: 12px; color: var(--muted); white-space: nowrap; min-width: 80px; padding-top: 1px; }
-    .cl-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--magenta); flex-shrink: 0; margin-top: 5px; }
-    .cl-content { flex: 1; }
-    .cl-title { font-size: 13px; font-weight: 600; }
-    .cl-detail { font-size: 12px; color: var(--muted); margin-top: 2px; }
-    .cl-initiative { font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 10px; background: var(--purple-light); color: var(--purple-mid); margin-left: 8px; }
+    .changelog-card{background:white;border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:24px}
+    .changelog-header{padding:16px 24px;border-bottom:1px solid var(--border);font-size:15px;font-weight:800}
+    .cl-entry{display:flex;gap:16px;padding:14px 24px;border-bottom:1px solid var(--off-s1)}
+    .cl-entry:last-child{border-bottom:none}
+    .cl-date{font-size:12px;color:var(--muted);white-space:nowrap;min-width:85px;padding-top:1px}
+    .cl-dot{width:8px;height:8px;border-radius:50%;background:var(--magenta);flex-shrink:0;margin-top:5px}
+    .cl-body{flex:1}
+    .cl-title{font-size:13px;font-weight:600}
+    .cl-detail{font-size:12px;color:var(--muted);margin-top:2px}
+    .cl-tag{font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px;background:var(--purple-light);color:var(--purple-mid);margin-left:8px;vertical-align:middle}
 
-    @media (max-width: 700px) {
-      .ticket-row, .col-headers { grid-template-columns: 90px 1fr 120px; }
-      .ticket-assignee { display: none; }
-      .summary-card { min-width: 120px; }
+    /* Tabs */
+    .tabs{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:24px}
+    .tab{padding:10px 18px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-2px}
+    .tab.active{color:var(--purple-dark);border-bottom-color:var(--magenta)}
+    .tab-panel{display:none}
+    .tab-panel.active{display:block}
+
+    /* Collapsible */
+    .collapsible-body{display:none}
+    .collapsible-body.open{display:block}
+    .toggle-icon{transition:transform .15s}
+    .toggle-icon.open{transform:rotate(90deg)}
+
+    @media(max-width:700px){
+      .lifecycle,.metrics-row{grid-template-columns:1fr 1fr}
+      .lc-cell:nth-child(2n){border-right:none}
+      .col-heads,.ticket-row{grid-template-columns:90px 1fr 120px}
+      .ta{display:none}
+      .summary-bar{gap:8px}
+      .sc{min-width:110px}
     }
   </style>
 </head>
@@ -118,7 +154,7 @@
     <div class="brand-mark">T</div>
     <div>
       <h1>Trainiac — Initiative Tracker</h1>
-      <div class="header-sub">TRNC · MAIN · Live from Jira</div>
+      <div class="header-sub">Dev · Comms · Rollout · Success Metrics</div>
     </div>
   </div>
   <div class="last-sync" id="lastSync">Last synced: 23/06/2026</div>
@@ -126,283 +162,417 @@
 
 <div class="container">
 
-  <!-- Summary bar -->
   <div class="summary-bar">
-    <div class="summary-card highlight">
-      <div class="num">4</div>
-      <div class="label">Active initiatives</div>
+    <div class="sc hi"><div class="num">4</div><div class="lbl">Active initiatives</div></div>
+    <div class="sc"><div class="num" style="color:var(--prog-fg)">8</div><div class="lbl">In Dev / Review</div></div>
+    <div class="sc"><div class="num" style="color:var(--test-fg)">9</div><div class="lbl">Testing</div></div>
+    <div class="sc"><div class="num" style="color:var(--rel-fg)">3</div><div class="lbl">Pending Release</div></div>
+    <div class="sc"><div class="num" style="color:#991b1b">2</div><div class="lbl">Blockers</div></div>
+  </div>
+
+  <!-- ======================== COMPLETED WORKOUT ======================== -->
+  <div class="initiative">
+    <div class="init-header">
+      <div>
+        <div class="init-title">✅ Completed Workout View — T4T
+          <span class="init-badge" style="background:var(--test-bg);color:var(--test-fg)">Testing &amp; Rollout</span>
+        </div>
+        <div class="init-meta">Feature live for lead trainers · All-trainer rollout this sprint · PM: Lilit</div>
+      </div>
     </div>
-    <div class="summary-card">
-      <div class="num" style="color:var(--status-progress-fg)">8</div>
-      <div class="label">In Progress / Review</div>
+
+    <!-- Lifecycle -->
+    <div class="lifecycle">
+      <div class="lc-cell">
+        <div class="lc-label">Development</div>
+        <div class="lc-status" style="color:var(--test-fg)">Testing</div>
+        <div class="lc-detail">4 workout modes in Testing/Validating. BFF endpoint Pending Release.</div>
+        <div class="lc-bar partial"></div>
+      </div>
+      <div class="lc-cell">
+        <div class="lc-label">Comms</div>
+        <div class="lc-status" style="color:#b45309">Partial</div>
+        <div class="lc-detail">Comm Doc created ✅<br>Partnerships ✅<br>CX ⏳ pending<br>Trainer announcement ⏳</div>
+        <div class="lc-bar partial"></div>
+      </div>
+      <div class="lc-cell">
+        <div class="lc-label">Rollout</div>
+        <div class="lc-status" style="color:var(--magenta)">In Progress</div>
+        <div class="lc-detail">Lead trainers live ✅<br>All trainers: this sprint ⏳<br>All subscribers: post-validation</div>
+        <div class="lc-bar partial"></div>
+      </div>
+      <div class="lc-cell">
+        <div class="lc-label">Analytics</div>
+        <div class="lc-status" style="color:#b45309">Partial</div>
+        <div class="lc-detail">Events proposal pending approval ⏳<br>iOS/Android implementation: To Do</div>
+        <div class="lc-bar partial"></div>
+      </div>
+      <div class="lc-cell">
+        <div class="lc-label">Success Metrics</div>
+        <div class="lc-status" style="color:var(--muted)">Not yet live</div>
+        <div class="lc-detail">Awaiting events + dashboard setup before KPIs can be tracked</div>
+        <div class="lc-bar none"></div>
+      </div>
     </div>
-    <div class="summary-card">
-      <div class="num" style="color:var(--status-testing-fg)">9</div>
-      <div class="label">Testing / Validating</div>
+
+    <!-- Rollout -->
+    <div class="rollout-row">
+      <div class="rollout-label">Rollout</div>
+      <div class="rollout-stages">
+        <div class="rollout-stage"><div class="stage-dot done"></div>Lead trainers (pilot)</div>
+        <div class="rollout-stage"><div class="stage-dot active"></div>All trainers — this sprint</div>
+        <div class="rollout-stage"><div class="stage-dot pending"></div>All subscribers — post-validation</div>
+      </div>
+      <div class="rollout-pct">~5%</div>
     </div>
-    <div class="summary-card">
-      <div class="num" style="color:var(--status-release-fg)">3</div>
-      <div class="label">Pending Release</div>
+
+    <!-- Metrics -->
+    <div class="metrics-row">
+      <div class="metric-cell">
+        <div class="metric-label">Feature adoption</div>
+        <div class="metric-val na">Pending data</div>
+        <div class="metric-sub">Source: Looker · post-events</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-label">Trainer engagement</div>
+        <div class="metric-val na">Pending data</div>
+        <div class="metric-sub">% trainers opening completed view</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-label">Feedback submitted</div>
+        <div class="metric-val na">Pending data</div>
+        <div class="metric-sub">iOS only (Android deeplink broken)</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-label">Check-in rate impact</div>
+        <div class="metric-val na">Pending data</div>
+        <div class="metric-sub">Baseline: establish before full rollout</div>
+      </div>
     </div>
-    <div class="summary-card">
-      <div class="num" style="color:#991b1b">2</div>
-      <div class="label">Active blockers</div>
+
+    <!-- Blockers -->
+    <div class="blockers">
+      <div class="blocker-item">⚠️ <span><strong>Android deeplink broken</strong> — workout feedback in chat iOS only. Deeplink to completed workout not working on Android.</span></div>
+      <div class="blocker-item">⚠️ <span><strong>Activity not covered</strong> — covers regular workouts only. Activity revamp frozen.</span></div>
+    </div>
+
+    <!-- Dev tickets (collapsible) -->
+    <div class="section-toggle" onclick="toggleSection('cw-dev')">
+      <span class="toggle-icon" id="cw-dev-icon">▶</span> Dev tickets (6 open)
+    </div>
+    <div class="collapsible-body" id="cw-dev">
+      <div class="col-heads"><span>Ticket</span><span>Summary</span><span>Status</span><span>Assignee</span></div>
+      <div class="ticket-row"><a class="tk" href="https://gympass.atlassian.net/browse/TRNC-3098" target="_blank">TRNC-3098</a><span class="ts">[WS] Create new endpoint to return Completed Workout data</span><span><span class="s s-rel">Pending Release</span></span><span class="ta">—</span></div>
+      <div class="ticket-row"><a class="tk" href="https://gympass.atlassian.net/browse/TRNC-3122" target="_blank">TRNC-3122</a><span class="ts">Workout Execution Mode</span><span><span class="s s-test">Testing</span></span><span class="ta">Unassigned</span></div>
+      <div class="ticket-row"><a class="tk" href="https://gympass.atlassian.net/browse/TRNC-3123" target="_blank">TRNC-3123</a><span class="ts">Workout Preview Mode</span><span><span class="s s-test">Testing</span></span><span class="ta">Unassigned</span></div>
+      <div class="ticket-row"><a class="tk" href="https://gympass.atlassian.net/browse/TRNC-3124" target="_blank">TRNC-3124</a><span class="ts">Workout Completed Mode</span><span><span class="s s-test">Testing</span></span><span class="ta">Unassigned</span></div>
+      <div class="ticket-row"><a class="tk" href="https://gympass.atlassian.net/browse/TRNC-3125" target="_blank">TRNC-3125</a><span class="ts">Workout Feedback Mode</span><span><span class="s s-test">Testing</span></span><span class="ta">Unassigned</span></div>
+      <div class="ticket-row"><a class="tk" href="https://gympass.atlassian.net/browse/TRNC-3181" target="_blank">TRNC-3181</a><span class="ts">[Mobile][Trainer] Remove create/manage interactions</span><span><span class="s s-rel">Pending Release</span></span><span class="ta">Juan Quispe</span></div>
+      <div class="ticket-row"><a class="tk" href="https://gympass.atlassian.net/browse/TRNC-3206" target="_blank">TRNC-3206</a><span class="ts">[T4T][FE] Refactor client list</span><span><span class="s s-test">Testing</span></span><span class="ta">Rafael Batista</span></div>
     </div>
   </div>
 
-  <!-- PAYMENTS -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-title">💳 Payments — T4T Phase 1</div>
-      <span class="section-badge" style="background:var(--status-progress-bg);color:var(--status-progress-fg)">In Development</span>
+  <!-- ======================== PAYMENTS ======================== -->
+  <div class="initiative">
+    <div class="init-header">
+      <div>
+        <div class="init-title">💳 Payments — T4T Phase 1
+          <span class="init-badge" style="background:var(--prog-bg);color:var(--prog-fg)">In Development</span>
+        </div>
+        <div class="init-meta">PRD complete · BFF in Code Review · FE UI Pending Release · Epic owner: Carlos Simoes</div>
+      </div>
     </div>
-    <div class="initiative-card">
-      <div class="card-header">
-        <div>
-          <div class="card-title">T4T Payments — Phase 1</div>
-          <div class="card-meta">PRD complete · Development WIP · Epic owner: Carlos Simoes</div>
-        </div>
-        <div class="card-progress">
-          <div class="progress-pct">~40% done</div>
-          <div class="progress-bar-wrap"><div class="progress-bar" style="width:40%"></div></div>
-        </div>
+
+    <div class="lifecycle">
+      <div class="lc-cell">
+        <div class="lc-label">Development</div>
+        <div class="lc-status" style="color:var(--prog-fg)">In Progress</div>
+        <div class="lc-detail">BFF: 2 in Code Review, 1 In Progress. FE UI Pending Release. ~40% done.</div>
+        <div class="lc-bar partial"></div>
       </div>
-      <div class="col-headers"><span>Ticket</span><span>Summary</span><span>Status</span><span>Assignee</span></div>
-      <div class="ticket-list">
-        <div class="ticket-row">
-          <a class="ticket-key" href="https://gympass.atlassian.net/browse/TRNC-3183" target="_blank">TRNC-3183</a>
-          <span class="ticket-summary">T4T Payments — Phase 1 (Epic)</span>
-          <span><span class="status s-progress">In Progress</span></span>
-          <span class="ticket-assignee">Carlos Simoes</span>
-        </div>
-        <div class="ticket-row">
-          <a class="ticket-key" href="https://gympass.atlassian.net/browse/TRNC-3184" target="_blank">TRNC-3184</a>
-          <span class="ticket-summary">[BFF] Scaffold PaymentsModule (guards, Unleash flag)</span>
-          <span><span class="status s-review">Code Review</span></span>
-          <span class="ticket-assignee">Debora Cavallari</span>
-        </div>
-        <div class="ticket-row">
-          <a class="ticket-key" href="https://gympass.atlassian.net/browse/TRNC-3185" target="_blank">TRNC-3185</a>
-          <span class="ticket-summary">[BFF] GET /history — merge algorithm + endpoint</span>
-          <span><span class="status s-review">Code Review</span></span>
-          <span class="ticket-assignee">Debora Cavallari</span>
-        </div>
-        <div class="ticket-row">
-          <a class="ticket-key" href="https://gympass.atlassian.net/browse/TRNC-3186" target="_blank">TRNC-3186</a>
-          <span class="ticket-summary">[BFF] GET /history/:monthKey — month detail</span>
-          <span><span class="status s-progress">In Progress</span></span>
-          <span class="ticket-assignee">Vinicius Melin</span>
-        </div>
-        <div class="ticket-row">
-          <a class="ticket-key" href="https://gympass.atlassian.net/browse/TRNC-3187" target="_blank">TRNC-3187</a>
-          <span class="ticket-summary">[BFF] PaymentsService — currency normalization, labels</span>
-          <span><span class="status s-todo">To Do</span></span>
-          <span class="ticket-assignee">Unassigned</span>
-        </div>
-        <div class="ticket-row">
-          <a class="ticket-key" href="https://gympass.atlassian.net/browse/TRNC-3190" target="_blank">TRNC-3190</a>
-          <span class="ticket-summary">[FE] Payments UI — nav, history, hero card, detail drawer</span>
-          <span><span class="status s-release">Pending Release</span></span>
-          <span class="ticket-assignee">Rafael Batista</span>
-        </div>
-        <div class="ticket-row">
-          <a class="ticket-key" href="https://gympass.atlassian.net/browse/TRNC-3191" target="_blank">TRNC-3191</a>
-          <span class="ticket-summary">[FE] Analytics events E-1..E-4</span>
-          <span><span class="status s-todo">To Do</span></span>
-          <span class="ticket-assignee">Unassigned</span>
-        </div>
-        <div class="ticket-row">
-          <a class="ticket-key" href="https://gympass.atlassian.net/browse/TRNC-3204" target="_blank">TRNC-3204</a>
-          <span class="ticket-summary">[B2] Numbered history pagination — deferred from Phase 1</span>
-          <span><span class="status s-deferred">Deferred</span></span>
-          <span class="ticket-assignee">Unassigned</span>
-        </div>
+      <div class="lc-cell">
+        <div class="lc-label">Comms</div>
+        <div class="lc-status" style="color:var(--muted)">Not started</div>
+        <div class="lc-detail">Comm Doc not yet created.<br>Trainer comms TBD post-dev.</div>
+        <div class="lc-bar none"></div>
       </div>
+      <div class="lc-cell">
+        <div class="lc-label">Rollout</div>
+        <div class="lc-status" style="color:var(--muted)">Not started</div>
+        <div class="lc-detail">Unleash flag-based rollout planned (TRNC-3193). Staged rollout % TBD.</div>
+        <div class="lc-bar none"></div>
+      </div>
+      <div class="lc-cell">
+        <div class="lc-label">Analytics</div>
+        <div class="lc-status" style="color:var(--todo-fg)">To Do</div>
+        <div class="lc-detail">Events E-1..E-4 defined (TRNC-3191). Not implemented yet.</div>
+        <div class="lc-bar none"></div>
+      </div>
+      <div class="lc-cell">
+        <div class="lc-label">Success Metrics</div>
+        <div class="lc-status" style="color:var(--muted)">Not yet defined</div>
+        <div class="lc-detail">KPIs to define: payment view rate, trainer payout adoption, support tickets</div>
+        <div class="lc-bar none"></div>
+      </div>
+    </div>
+
+    <div class="rollout-row">
+      <div class="rollout-label">Rollout</div>
+      <div class="rollout-stages">
+        <div class="rollout-stage"><div class="stage-dot pending"></div>Internal / QA</div>
+        <div class="rollout-stage"><div class="stage-dot pending"></div>Lead trainers (flag-gated)</div>
+        <div class="rollout-stage"><div class="stage-dot pending"></div>All trainers</div>
+      </div>
+      <div class="rollout-pct">0%</div>
+    </div>
+
+    <div class="metrics-row">
+      <div class="metric-cell">
+        <div class="metric-label">Payment view rate</div>
+        <div class="metric-val na">Not live</div>
+        <div class="metric-sub">KPI: % trainers viewing payment history</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-label">Trainer payout adoption</div>
+        <div class="metric-val na">Not live</div>
+        <div class="metric-sub">% eligible trainers with payout configured</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-label">Support tickets (payments)</div>
+        <div class="metric-val na">Baseline TBD</div>
+        <div class="metric-sub">Track reduction post-launch</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-label">Monitoring alerts</div>
+        <div class="metric-val na">Not set up</div>
+        <div class="metric-sub">TRNC-3193 (Ops) not started</div>
+      </div>
+    </div>
+
+    <div class="section-toggle" onclick="toggleSection('pay-dev')">
+      <span class="toggle-icon" id="pay-dev-icon">▶</span> Dev tickets (8 open)
+    </div>
+    <div class="collapsible-body" id="pay-dev">
+      <div class="col-heads"><span>Ticket</span><span>Summary</span><span>Status</span><span>Assignee</span></div>
+      <div class="ticket-row"><a class="tk" href="https://gympass.atlassian.net/browse/TRNC-3183" target="_blank">TRNC-3183</a><span class="ts">T4T Payments — Phase 1 (Epic)</span><span><span class="s s-prog">In Progress</span></span><span class="ta">Carlos Simoes</span></div>
+      <div class="ticket-row"><a class="tk" href="https://gympass.atlassian.net/browse/TRNC-3184" target="_blank">TRNC-3184</a><span class="ts">[BFF] Scaffold PaymentsModule (guards, Unleash flag)</span><span><span class="s s-review">Code Review</span></span><span class="ta">Debora Cavallari</span></div>
+      <div class="ticket-row"><a class="tk" href="https://gympass.atlassian.net/browse/TRNC-3185" target="_blank">TRNC-3185</a><span class="ts">[BFF] GET /history — merge algorithm + endpoint</span><span><span class="s s-review">Code Review</span></span><span class="ta">Debora Cavallari</span></div>
+      <div class="ticket-row"><a class="tk" href="https://gympass.atlassian.net/browse/TRNC-3186" target="_blank">TRNC-3186</a><span class="ts">[BFF] GET /history/:monthKey — month detail</span><span><span class="s s-prog">In Progress</span></span><span class="ta">Vinicius Melin</span></div>
+      <div class="ticket-row"><a class="tk" href="https://gympass.atlassian.net/browse/TRNC-3187" target="_blank">TRNC-3187</a><span class="ts">[BFF] PaymentsService — currency normalization, labels</span><span><span class="s s-todo">To Do</span></span><span class="ta">Unassigned</span></div>
+      <div class="ticket-row"><a class="tk" href="https://gympass.atlassian.net/browse/TRNC-3190" target="_blank">TRNC-3190</a><span class="ts">[FE] Payments UI — nav, history, hero card, detail drawer</span><span><span class="s s-rel">Pending Release</span></span><span class="ta">Rafael Batista</span></div>
+      <div class="ticket-row"><a class="tk" href="https://gympass.atlassian.net/browse/TRNC-3191" target="_blank">TRNC-3191</a><span class="ts">[FE] Analytics events E-1..E-4</span><span><span class="s s-todo">To Do</span></span><span class="ta">Unassigned</span></div>
+      <div class="ticket-row"><a class="tk" href="https://gympass.atlassian.net/browse/TRNC-3193" target="_blank">TRNC-3193</a><span class="ts">[Ops] Monitoring, alerts &amp; flag-based rollout/rollback</span><span><span class="s s-todo">To Do</span></span><span class="ta">Unassigned</span></div>
+      <div class="ticket-row"><a class="tk" href="https://gympass.atlassian.net/browse/TRNC-3204" target="_blank">TRNC-3204</a><span class="ts">[B2] Numbered history pagination — deferred from Phase 1</span><span><span class="s s-def">Deferred</span></span><span class="ta">Unassigned</span></div>
     </div>
   </div>
 
-  <!-- COMPLETED WORKOUT -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-title">✅ Completed Workout View — T4T</div>
-      <span class="section-badge" style="background:var(--status-testing-bg);color:var(--status-testing-fg)">Testing & Release</span>
+  <!-- ======================== PARSE MIGRATION ======================== -->
+  <div class="initiative">
+    <div class="init-header">
+      <div>
+        <div class="init-title">🔧 Parse SDK Migration — Android
+          <span class="init-badge" style="background:var(--rel-bg);color:var(--rel-fg)">Near Completion</span>
+        </div>
+        <div class="init-meta">Most screens migrated · Retrofit refactor in progress · Owner: Gustavo Soares</div>
+      </div>
     </div>
-    <div class="initiative-card">
-      <div class="card-header">
-        <div>
-          <div class="card-title">Completed Workout View</div>
-          <div class="card-meta">Feature live for lead trainers · All-trainer rollout this sprint · Comm Doc pending CX</div>
-        </div>
-        <div class="card-progress">
-          <div class="progress-pct">~75% done</div>
-          <div class="progress-bar-wrap"><div class="progress-bar" style="width:75%"></div></div>
-        </div>
+
+    <div class="lifecycle">
+      <div class="lc-cell">
+        <div class="lc-label">Development</div>
+        <div class="lc-status" style="color:var(--rel-fg)">~80% done</div>
+        <div class="lc-detail">3 tickets Testing/Validating, 1 Pending Release, 1 In Progress (Retrofit).</div>
+        <div class="lc-bar done"></div>
       </div>
-      <div class="col-headers"><span>Ticket</span><span>Summary</span><span>Status</span><span>Assignee</span></div>
-      <div class="ticket-list">
-        <div class="ticket-row">
-          <a class="ticket-key" href="https://gympass.atlassian.net/browse/TRNC-3122" target="_blank">TRNC-3122</a>
-          <span class="ticket-summary">Workout Execution Mode</span>
-          <span><span class="status s-testing">Testing</span></span>
-          <span class="ticket-assignee">Unassigned</span>
-        </div>
-        <div class="ticket-row">
-          <a class="ticket-key" href="https://gympass.atlassian.net/browse/TRNC-3123" target="_blank">TRNC-3123</a>
-          <span class="ticket-summary">Workout Preview Mode</span>
-          <span><span class="status s-testing">Testing</span></span>
-          <span class="ticket-assignee">Unassigned</span>
-        </div>
-        <div class="ticket-row">
-          <a class="ticket-key" href="https://gympass.atlassian.net/browse/TRNC-3124" target="_blank">TRNC-3124</a>
-          <span class="ticket-summary">Workout Completed Mode</span>
-          <span><span class="status s-testing">Testing</span></span>
-          <span class="ticket-assignee">Unassigned</span>
-        </div>
-        <div class="ticket-row">
-          <a class="ticket-key" href="https://gympass.atlassian.net/browse/TRNC-3125" target="_blank">TRNC-3125</a>
-          <span class="ticket-summary">Workout Feedback Mode</span>
-          <span><span class="status s-testing">Testing</span></span>
-          <span class="ticket-assignee">Unassigned</span>
-        </div>
-        <div class="ticket-row">
-          <a class="ticket-key" href="https://gympass.atlassian.net/browse/TRNC-3206" target="_blank">TRNC-3206</a>
-          <span class="ticket-summary">[T4T][FE] Refactor client list</span>
-          <span><span class="status s-testing">Testing</span></span>
-          <span class="ticket-assignee">Rafael Batista</span>
-        </div>
-        <div class="ticket-row">
-          <a class="ticket-key" href="https://gympass.atlassian.net/browse/TRNC-3181" target="_blank">TRNC-3181</a>
-          <span class="ticket-summary">[Mobile][Trainer] Remove create/manage interactions</span>
-          <span><span class="status s-release">Pending Release</span></span>
-          <span class="ticket-assignee">Juan Quispe</span>
-        </div>
+      <div class="lc-cell">
+        <div class="lc-label">Comms</div>
+        <div class="lc-status" style="color:var(--muted)">Internal only</div>
+        <div class="lc-detail">Engineering migration — no external comms required.</div>
+        <div class="lc-bar done"></div>
       </div>
-      <div class="blocker-list">
-        <div class="blocker-item">⚠️ <span><strong>Android deeplink broken</strong> — workout feedback in chat opens completed workout on iOS only. Deeplink not working on Android.</span></div>
-        <div class="blocker-item">⚠️ <span><strong>Activity not covered</strong> — this feature covers regular workouts only. Activity revamp is frozen.</span></div>
+      <div class="lc-cell">
+        <div class="lc-label">Rollout</div>
+        <div class="lc-status" style="color:var(--test-fg)">Per screen</div>
+        <div class="lc-detail">Each screen released independently as migration completes.</div>
+        <div class="lc-bar partial"></div>
       </div>
+      <div class="lc-cell">
+        <div class="lc-label">Analytics</div>
+        <div class="lc-status" style="color:var(--muted)">N/A</div>
+        <div class="lc-detail">Infrastructure migration — no new analytics needed.</div>
+        <div class="lc-bar done"></div>
+      </div>
+      <div class="lc-cell">
+        <div class="lc-label">Success Metrics</div>
+        <div class="lc-status" style="color:var(--muted)">Operational</div>
+        <div class="lc-detail">Success = 0 Parse SDK calls remaining. Monitor post-migration crash rate.</div>
+        <div class="lc-bar partial"></div>
+      </div>
+    </div>
+
+    <div class="rollout-row">
+      <div class="rollout-label">Rollout</div>
+      <div class="rollout-stages">
+        <div class="rollout-stage"><div class="stage-dot done"></div>Login migrated</div>
+        <div class="rollout-stage"><div class="stage-dot done"></div>Profile / language migrated</div>
+        <div class="rollout-stage"><div class="stage-dot active"></div>Workout Program flows (Pending Release)</div>
+        <div class="rollout-stage"><div class="stage-dot pending"></div>Full Retrofit refactor</div>
+      </div>
+      <div class="rollout-pct">~80%</div>
+    </div>
+
+    <div class="metrics-row">
+      <div class="metric-cell">
+        <div class="metric-label">Migration complete</div>
+        <div class="metric-val">~80%</div>
+        <div class="metric-sub">Screens migrated off Parse SDK</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-label">Parse calls remaining</div>
+        <div class="metric-val na">TBD</div>
+        <div class="metric-sub">Target: 0 after Retrofit complete</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-label">Android crash rate</div>
+        <div class="metric-val na">Monitor</div>
+        <div class="metric-sub">Watch post each screen migration</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-label">ETA full completion</div>
+        <div class="metric-val na">TBD</div>
+        <div class="metric-sub">Depends on Retrofit ticket scope</div>
+      </div>
+    </div>
+
+    <div class="section-toggle" onclick="toggleSection('parse-dev')">
+      <span class="toggle-icon" id="parse-dev-icon">▶</span> Dev tickets (4 open)
+    </div>
+    <div class="collapsible-body" id="parse-dev">
+      <div class="col-heads"><span>Ticket</span><span>Summary</span><span>Status</span><span>Assignee</span></div>
+      <div class="ticket-row"><a class="tk" href="https://gympass.atlassian.net/browse/TRNC-3177" target="_blank">TRNC-3177</a><span class="ts">[Android] Workout Program flows → BFF auth</span><span><span class="s s-rel">Pending Release</span></span><span class="ta">Gustavo Soares</span></div>
+      <div class="ticket-row"><a class="tk" href="https://gympass.atlassian.net/browse/TRNC-3169" target="_blank">TRNC-3169</a><span class="ts">[Android] Profile + measurements + language screens</span><span><span class="s s-test">Testing</span></span><span class="ta">Gustavo Soares</span></div>
+      <div class="ticket-row"><a class="tk" href="https://gympass.atlassian.net/browse/TRNC-3163" target="_blank">TRNC-3163</a><span class="ts">[Android] Migrate login to new endpoint</span><span><span class="s s-test">Testing</span></span><span class="ta">Gustavo Soares</span></div>
+      <div class="ticket-row"><a class="tk" href="https://gympass.atlassian.net/browse/TRNC-3168" target="_blank">TRNC-3168</a><span class="ts">Move away from Parse → Retrofit</span><span><span class="s s-prog">In Progress</span></span><span class="ta">Unassigned</span></div>
     </div>
   </div>
 
-  <!-- PARSE MIGRATION -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-title">🔧 Parse SDK Migration — Android</div>
-      <span class="section-badge" style="background:var(--status-release-bg);color:var(--status-release-fg)">Near Completion</span>
+  <!-- ======================== HIIT ======================== -->
+  <div class="initiative">
+    <div class="init-header">
+      <div>
+        <div class="init-title">🔴 HIIT Phase-out
+          <span class="init-badge" style="background:var(--todo-bg);color:var(--todo-fg)">Backlog — High Priority</span>
+        </div>
+        <div class="init-meta">BE endpoint shipped · Full phase-out not scoped · No owner assigned</div>
+      </div>
     </div>
-    <div class="initiative-card">
-      <div class="card-header">
-        <div>
-          <div class="card-title">Android Parse → BFF Auth Migration</div>
-          <div class="card-meta">Most screens migrated · Retrofit refactor in progress</div>
-        </div>
-        <div class="card-progress">
-          <div class="progress-pct">~80% done</div>
-          <div class="progress-bar-wrap"><div class="progress-bar" style="width:80%"></div></div>
-        </div>
+
+    <div class="lifecycle">
+      <div class="lc-cell">
+        <div class="lc-label">Development</div>
+        <div class="lc-status" style="color:#b45309">Partial</div>
+        <div class="lc-detail">BE done (TRNC-3236). Mobile + FE + full cleanup not scoped.</div>
+        <div class="lc-bar partial"></div>
       </div>
-      <div class="col-headers"><span>Ticket</span><span>Summary</span><span>Status</span><span>Assignee</span></div>
-      <div class="ticket-list">
-        <div class="ticket-row">
-          <a class="ticket-key" href="https://gympass.atlassian.net/browse/TRNC-3177" target="_blank">TRNC-3177</a>
-          <span class="ticket-summary">[Android] Workout Program flows → BFF auth</span>
-          <span><span class="status s-release">Pending Release</span></span>
-          <span class="ticket-assignee">Gustavo Soares</span>
-        </div>
-        <div class="ticket-row">
-          <a class="ticket-key" href="https://gympass.atlassian.net/browse/TRNC-3169" target="_blank">TRNC-3169</a>
-          <span class="ticket-summary">[Android] Profile + measurements + language screens</span>
-          <span><span class="status s-testing">Testing</span></span>
-          <span class="ticket-assignee">Gustavo Soares</span>
-        </div>
-        <div class="ticket-row">
-          <a class="ticket-key" href="https://gympass.atlassian.net/browse/TRNC-3163" target="_blank">TRNC-3163</a>
-          <span class="ticket-summary">[Android] Migrate login to new endpoint</span>
-          <span><span class="status s-testing">Testing</span></span>
-          <span class="ticket-assignee">Gustavo Soares</span>
-        </div>
-        <div class="ticket-row">
-          <a class="ticket-key" href="https://gympass.atlassian.net/browse/TRNC-3168" target="_blank">TRNC-3168</a>
-          <span class="ticket-summary">Move away from Parse → Retrofit</span>
-          <span><span class="status s-progress">In Progress</span></span>
-          <span class="ticket-assignee">Unassigned</span>
-        </div>
+      <div class="lc-cell">
+        <div class="lc-label">Comms</div>
+        <div class="lc-status" style="color:var(--muted)">Not started</div>
+        <div class="lc-detail">Trainer + subscriber comms needed before deprecation.</div>
+        <div class="lc-bar none"></div>
       </div>
+      <div class="lc-cell">
+        <div class="lc-label">Rollout</div>
+        <div class="lc-status" style="color:var(--muted)">Not started</div>
+        <div class="lc-detail">Staged deprecation plan not defined.</div>
+        <div class="lc-bar none"></div>
+      </div>
+      <div class="lc-cell">
+        <div class="lc-label">Analytics</div>
+        <div class="lc-status" style="color:var(--muted)">TBD</div>
+        <div class="lc-detail">Need to measure HIIT usage before removal to assess impact.</div>
+        <div class="lc-bar none"></div>
+      </div>
+      <div class="lc-cell">
+        <div class="lc-label">Success Metrics</div>
+        <div class="lc-status" style="color:var(--muted)">TBD</div>
+        <div class="lc-detail">Success = HIIT content fully removed, no regression in check-in rate.</div>
+        <div class="lc-bar none"></div>
+      </div>
+    </div>
+
+    <div class="rollout-row">
+      <div class="rollout-label">Rollout</div>
+      <div class="rollout-stages">
+        <div class="rollout-stage"><div class="stage-dot done"></div>BE endpoints cleaned up</div>
+        <div class="rollout-stage"><div class="stage-dot pending"></div>Mobile removal</div>
+        <div class="rollout-stage"><div class="stage-dot pending"></div>FE removal + comms</div>
+        <div class="rollout-stage"><div class="stage-dot pending"></div>Full deprecation</div>
+      </div>
+      <div class="rollout-pct">15%</div>
+    </div>
+
+    <div class="metrics-row">
+      <div class="metric-cell">
+        <div class="metric-label">HIIT sessions / week</div>
+        <div class="metric-val na">Baseline needed</div>
+        <div class="metric-sub">Source: Metabase · measure before removal</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-label">Trainers using HIIT</div>
+        <div class="metric-val na">Baseline needed</div>
+        <div class="metric-sub">% trainers with active HIIT programs</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-label">Check-in rate (post)</div>
+        <div class="metric-val na">Monitor</div>
+        <div class="metric-sub">Ensure no regression after removal</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-label">Support tickets</div>
+        <div class="metric-val na">Track post-comms</div>
+        <div class="metric-sub">Expect spike — monitor for 2 weeks</div>
+      </div>
+    </div>
+
+    <div class="section-toggle" onclick="toggleSection('hiit-dev')">
+      <span class="toggle-icon" id="hiit-dev-icon">▶</span> Dev tickets (1 done, full scope TBD)
+    </div>
+    <div class="collapsible-body" id="hiit-dev">
+      <div class="col-heads"><span>Ticket</span><span>Summary</span><span>Status</span><span>Assignee</span></div>
+      <div class="ticket-row"><a class="tk" href="https://gympass.atlassian.net/browse/TRNC-3236" target="_blank">TRNC-3236</a><span class="ts">[BE] Stop returning HIIT workouts/templates from all API endpoints</span><span><span class="s s-done">Done</span></span><span class="ta">Debora Cavallari</span></div>
+      <div class="ticket-row"><span class="tk" style="color:var(--muted)">TBD</span><span class="ts" style="color:var(--muted)">Mobile + FE removal + comms plan — not yet scoped</span><span><span class="s s-todo">Not started</span></span><span class="ta">Unassigned</span></div>
     </div>
   </div>
 
-  <!-- HIIT -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-title">🔴 HIIT Phase-out</div>
-      <span class="section-badge" style="background:var(--status-todo-bg);color:var(--status-todo-fg)">Backlog — High Priority</span>
-    </div>
-    <div class="initiative-card">
-      <div class="card-header">
-        <div>
-          <div class="card-title">HIIT Phase-out</div>
-          <div class="card-meta">BE ticket shipped · Full phase-out not yet scoped or assigned</div>
-        </div>
-        <div class="card-progress">
-          <div class="progress-pct">~15% done</div>
-          <div class="progress-bar-wrap"><div class="progress-bar" style="width:15%;background:var(--muted)"></div></div>
-        </div>
-      </div>
-      <div class="col-headers"><span>Ticket</span><span>Summary</span><span>Status</span><span>Assignee</span></div>
-      <div class="ticket-list">
-        <div class="ticket-row">
-          <a class="ticket-key" href="https://gympass.atlassian.net/browse/TRNC-3236" target="_blank">TRNC-3236</a>
-          <span class="ticket-summary">[BE] Stop returning HIIT workouts/templates from all API endpoints</span>
-          <span><span class="status s-done">Done</span></span>
-          <span class="ticket-assignee">Debora Cavallari</span>
-        </div>
-        <div class="ticket-row">
-          <span class="ticket-key">TBD</span>
-          <span class="ticket-summary">Full HIIT phase-out — mobile + FE + comms</span>
-          <span><span class="status s-todo">Not started</span></span>
-          <span class="ticket-assignee">Not assigned</span>
-        </div>
+  <!-- ======================== CHANGELOG ======================== -->
+  <div class="changelog-card">
+    <div class="changelog-header">📋 Changelog</div>
+    <div class="cl-entry">
+      <div class="cl-date">23/06/2026</div><div class="cl-dot"></div>
+      <div class="cl-body">
+        <div class="cl-title">Initiative tracker launched — Jira + GChat connected <span class="cl-tag">All</span></div>
+        <div class="cl-detail">Dashboard live at lilit-wellhub.github.io/trainiac-initiatives. Daily scan active. GChat space receiving digests.</div>
       </div>
     </div>
-  </div>
-
-  <!-- CHANGELOG -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-title">📋 Changelog</div>
+    <div class="cl-entry">
+      <div class="cl-date">23/06/2026</div><div class="cl-dot"></div>
+      <div class="cl-body">
+        <div class="cl-title">Completed Workout: rolled out to lead trainers <span class="cl-tag">Completed Workout</span></div>
+        <div class="cl-detail">Comm Doc created and shared with Partnerships. CX comms pending. Events proposal submitted to data team for approval.</div>
+      </div>
     </div>
-    <div class="changelog">
-      <div class="changelog-entry">
-        <div class="cl-date">23/06/2026</div>
-        <div class="cl-dot"></div>
-        <div class="cl-content">
-          <div class="cl-title">Initiative tracker launched <span class="cl-initiative">All initiatives</span></div>
-          <div class="cl-detail">Jira TRNC + MAIN connected. GChat webhook active. Dashboard live.</div>
-        </div>
+    <div class="cl-entry">
+      <div class="cl-date">23/06/2026</div><div class="cl-dot"></div>
+      <div class="cl-body">
+        <div class="cl-title">Payments Phase 1: BFF scaffold in code review <span class="cl-tag">Payments</span></div>
+        <div class="cl-detail">TRNC-3184 + TRNC-3185 in Code Review (Debora). FE UI (TRNC-3190) already Pending Release (Rafael).</div>
       </div>
-      <div class="changelog-entry">
-        <div class="cl-date">23/06/2026</div>
-        <div class="cl-dot"></div>
-        <div class="cl-content">
-          <div class="cl-title">Completed Workout rolled out to lead trainers <span class="cl-initiative">Completed Workout</span></div>
-          <div class="cl-detail">Comm Doc shared with Partnerships. CX comms pending. Events proposal pending data team approval.</div>
-        </div>
-      </div>
-      <div class="changelog-entry">
-        <div class="cl-date">23/06/2026</div>
-        <div class="cl-dot"></div>
-        <div class="cl-content">
-          <div class="cl-title">Payments Phase 1 — BFF scaffold in code review <span class="cl-initiative">Payments</span></div>
-          <div class="cl-detail">TRNC-3184 and TRNC-3185 in Code Review (Debora). FE UI already Pending Release (Rafael).</div>
-        </div>
-      </div>
-      <div class="changelog-entry">
-        <div class="cl-date">23/06/2026</div>
-        <div class="cl-dot"></div>
-        <div class="cl-content">
-          <div class="cl-title">HIIT BE endpoint shipped <span class="cl-initiative">HIIT Phase-out</span></div>
-          <div class="cl-detail">TRNC-3236 done — BE no longer returns HIIT workouts/templates. Full phase-out still backlog.</div>
-        </div>
+    </div>
+    <div class="cl-entry">
+      <div class="cl-date">23/06/2026</div><div class="cl-dot"></div>
+      <div class="cl-body">
+        <div class="cl-title">HIIT: BE endpoint shipped <span class="cl-tag">HIIT Phase-out</span></div>
+        <div class="cl-detail">TRNC-3236 done. BE no longer returns HIIT workouts/templates. Full phase-out still backlog — comms + mobile not started.</div>
       </div>
     </div>
   </div>
@@ -410,7 +580,15 @@
 </div>
 
 <script>
-  // Update last sync timestamp from URL param or localStorage
+  function toggleSection(id) {
+    const body = document.getElementById(id);
+    const icon = document.getElementById(id + '-icon');
+    body.classList.toggle('open');
+    icon.classList.toggle('open');
+    icon.textContent = body.classList.contains('open') ? '▼' : '▶';
+  }
+
+  // Sync timestamp
   const params = new URLSearchParams(window.location.search);
   const sync = params.get('sync') || localStorage.getItem('lastSync');
   if (sync) {
