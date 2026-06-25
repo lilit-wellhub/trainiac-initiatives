@@ -89,6 +89,12 @@
     .action-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--amber);margin-bottom:4px}
     .action-item:last-child{margin-bottom:0}
     .action-info{color:var(--blue)}
+    .action-item a{color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:2px;opacity:.85}
+    .action-item a:hover{opacity:1}
+    .eta{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.2px;padding:1px 7px;border-radius:3px;margin-left:6px;vertical-align:middle;white-space:nowrap;background:rgba(0,0,0,.1);opacity:.8}
+    .eta-hot{background:var(--red-bg);color:var(--red)}
+    .eta-warn{background:#fef3c7;color:#92400e}
+    .eta-ok{background:var(--green-bg);color:var(--green)}
 
     /* Metrics */
     .metrics-row{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border)}
@@ -202,7 +208,73 @@
 
 
   <!-- ══════════════════════════════════════════════════════════
-       PROJECT 1: T4T
+       PROJECT 1: T2  (highest priority — 5-week window)
+  ══════════════════════════════════════════════════════════ -->
+  <div class="project-section">
+    <div class="project-header">
+      <div class="project-label">T2 — AI Trainiac for Lower Tiers</div>
+      <span class="project-badge" style="background:var(--red-bg);color:var(--red)">⚠ Urgent — 5 weeks to test launch</span>
+      <div class="project-desc">AI-powered coaching for Bronze/below-Silver subscribers · Strategy in discussion</div>
+    </div>
+
+    <div class="init-card">
+      <div style="background:linear-gradient(135deg,var(--purple-dark) 0%,#2d1b5e 100%);padding:18px 22px 14px;color:white;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+          <div>
+            <div style="font-size:16px;font-weight:800;letter-spacing:-.3px;margin-bottom:5px">Trainiac AI — AI-first coaching for every Wellhub member</div>
+            <div style="font-size:12px;color:var(--purple-light)">Replaces $6.32/user PT cost model · Near-zero marginal cost · Democratic access to personalized strength training</div>
+          </div>
+          <div style="background:var(--magenta);color:white;font-size:12px;font-weight:700;padding:5px 14px;border-radius:20px;white-space:nowrap;flex-shrink:0">PMF gate: ~28/07/2026</div>
+        </div>
+      </div>
+      <div class="status-brief">
+        <p><strong>The case for change:</strong> Current Trainiac costs $6.32/active user — 75% of ~$400K/month in PT payments — with a proven LTV uplift under $1. Competitors (Hevy, Gymnahtics) run at ~$2/user and grow faster. The target is ≤$1/user via AI coaching for 3× the users. Current Trainiac stays live and maintained; this is a parallel, scalable layer targeting plans below Silver.</p>
+        <p><strong>The product — 6 components:</strong> (1) Wellhub SSO — one tap, no new password. (2) Onboarding — minimum signal only; every question must directly affect session 1. (3) AI Coach — generates structured multi-week program, adapts from RPE feedback every session, handles missed sessions/injury/equipment changes instantly. (4) Execution — frictionless logging + real-time cues. (5) Accountability — specific PR recognition, non-judgmental re-engagement. (6) Progress — personal records and training evidence, not motivation content. Plan generated in 30 seconds vs 48-hour PT booking cycle.</p>
+        <p><strong>PMF gate — all 5 required to open Phase 2:</strong> Activation ≥75% (sign up → first workout) · Onboarding completion ~95% · AI call complete ~42% · W1 retention ≥44% · W4 retention ≥24%. Phase 2 scope: how PT network adds value in the new model; how existing base migrates; possible premium PT tier.</p>
+        <p><strong>This week's critical path (from T2 PLAN meeting Jun 23):</strong> Internal kick-off <strong>tomorrow Jun 24 at 9h</strong> — Alice presents base material (problem statement + success criteria rewritten tonight). Everyone runs Grill Me individually (AI-interrogates each person on the problem, ~30–40 min) and sends results by <strong>Thu Jun 26</strong>. Synthesis meeting <strong>Fri Jun 26 at 13h</strong> — team discusses consolidated proposals. Broader kick-off also on calendar Jun 24 at 13h (12 attendees). DataVentures alignment Jun 30 — instrument the 5 PMF metrics. Trainiac Leads Jun 29 — cross-stream status.</p>
+        <p><strong>Roles locked in T2 PLAN:</strong> Lilit = R for PRD. Marina = R for design + Figma prototyping (high-fidelity, Figma Make). Alice leading the "Grill Me" framework (AI-interrogates each person individually → synthesis → PRD). All deliveries require design approval. Approach: lean — solve the core problem first, adaptation is the key value (chat is just one interface).</p>
+      </div>
+      <div class="cf-track">
+        <div class="cf-cell"><div class="cf-label">Strategy</div><div class="cf-status" style="color:#f59e0b">Deck done — aligning</div><div class="cf-detail">NV Town Hall deck (Jun 2026) sets the full vision and PMF gate. Kick-off Jun 24 + Solution Jun 26 to lock scope and team.</div><div class="cf-bar" style="width:25%;background:#f59e0b;height:3px;border-radius:2px;margin-top:8px"></div></div>
+        <div class="cf-cell"><div class="cf-label">Engineering</div><div class="cf-status" style="color:var(--red)">Not started</div><div class="cf-detail">6 components to build. No Jira project yet. Team TBD post kick-off Jun 24. Scope TBD Jun 26.</div><div class="cf-bar bar-none"></div></div>
+        <div class="cf-cell"><div class="cf-label">Comms</div><div class="cf-status" style="color:var(--red)">Not started</div><div class="cf-detail">Internal alignment in progress (Town Hall done). Trainer/PT communications about model shift + external GTM not started.</div><div class="cf-bar bar-none"></div></div>
+        <div class="cf-cell"><div class="cf-label">Data / Analytics</div><div class="cf-status" style="color:#f59e0b">KPIs defined</div><div class="cf-detail">5 PMF metrics locked from strategy deck. Instrumentation + Looker dashboards not yet built. Align with DataVentures Jun 30.</div><div class="cf-bar" style="width:20%;background:#f59e0b;height:3px;border-radius:2px;margin-top:8px"></div></div>
+        <div class="cf-cell"><div class="cf-label">CX / Support</div><div class="cf-status" style="color:var(--red)">Not engaged</div><div class="cf-detail">Will need FAQ + trainer communications about the model shift. Scope after strategy is locked.</div><div class="cf-bar bar-none"></div></div>
+      </div>
+      <div class="rollout-row">
+        <div class="rl-label">Rollout</div>
+        <div class="rl-stages">
+          <div class="rl-stage"><div class="rl-dot dot-urgent"></div>Kick-off (24/06)</div>
+          <div class="rl-stage"><div class="rl-dot dot-pending"></div>Scope + team locked (26/06)</div>
+          <div class="rl-stage"><div class="rl-dot dot-pending"></div>Build (6 components)</div>
+          <div class="rl-stage"><div class="rl-dot dot-pending"></div>PMF test (~28/07)</div>
+          <div class="rl-stage"><div class="rl-dot dot-pending"></div>Phase 2 — PT model</div>
+        </div>
+        <div class="rl-pct" style="color:var(--red)">5%</div>
+      </div>
+      <div class="pm-action">
+        <div class="pm-action-label">PM action — this week</div>
+        <div class="action-item">⚡ <a href="https://calendar.google.com/calendar/event?eid=MjUzYTlxNWM5cGxrZ2piYmM2bzdxb2cwc2og" target="_blank">Internal kick-off Jun 24 at 9h</a> — Alice presents; read base material in advance · <a href="https://docs.google.com/document/d/1pWEPr4BiIxMlCvosnZOTKMkAXQZL4mBlQ5MCbHCNIYs/edit" target="_blank">T2 PLAN notes</a><span class="eta eta-hot">tomorrow 9h</span></div>
+        <div class="action-item">⚡ Run Grill Me individually — AI interrogates you on the problem + criteria (~30–40 min) · <a href="https://docs.google.com/document/d/1pWEPr4BiIxMlCvosnZOTKMkAXQZL4mBlQ5MCbHCNIYs/edit" target="_blank">T2 PLAN notes</a><span class="eta eta-hot">by Thu Jun 26</span></div>
+        <div class="action-item">⚡ <a href="https://calendar.google.com/calendar/event?eid=NGk2aWVxYzgwZ3A1b29kb2hjY2UzOWU2dGQg" target="_blank">Synthesis meeting Fri Jun 26 at 13h</a> — read consolidated proposals before joining<span class="eta eta-hot">Fri 13h</span></div>
+        <div class="action-item">⚡ Define test cohort — who gets access first, how many, from which plans · <a href="https://docs.google.com/presentation/d/1NTxfCFwwXoIsY9x-m8cZd1B9q26x5_fQ/edit" target="_blank">strategy deck</a><span class="eta eta-hot">by Jun 26 — blocks build start</span></div>
+        <div class="action-item">⚡ Clarify iOS relationship — does T2 = new iOS app, web-first, or both? · <a href="https://docs.google.com/presentation/d/1NTxfCFwwXoIsY9x-m8cZd1B9q26x5_fQ/edit#slide=id.p7" target="_blank">deck slide 7</a><span class="eta eta-hot">by Jun 26</span></div>
+        <div class="action-item">⚡ <a href="https://calendar.google.com/calendar/event?eid=ODRoZThoN3MyZnYzNGFjcXVxb2EyN2NvaW9fMjAyNjA2MzBUMTYzMDAwWiA" target="_blank">DataVentures Jun 30</a> — instrument all 5 PMF gate metrics before build starts<span class="eta eta-warn">Jun 30 — before build</span></div>
+        <div class="action-item">⚡ Align with Partnership team on coaching logic ownership — they are building "Trainer AI Coach" + coaching quality standards in parallel · <a href="https://docs.google.com/document/d/1ub5dbyFGYFscSYptxT8PzV9v5HWE4Yy5esDQX8Cmtz4/edit" target="_blank">Partnership AI doc</a><span class="eta eta-warn">before build — avoid duplicate coaching logic</span></div>
+        <div class="action-item action-info">ℹ After Fri synthesis: compare approved scope against <a href="https://docs.google.com/document/d/1_aMinPaMvKa3mqR4VHAmErfj744ttzbL5lFacqALFx0/edit" target="_blank">PM brainstorm doc</a> — check if offline, wearable layer, or trainer corpus requirements got dropped</div>
+      </div>
+      <div class="metrics-row">
+        <div class="m-cell"><div class="m-label">PMF: Activation</div><div class="m-val pending">Target ≥75%</div><div class="m-sub">Sign up → first workout completed</div></div>
+        <div class="m-cell"><div class="m-label">PMF: W1 retention</div><div class="m-val pending">Target ≥44%</div><div class="m-sub">Baseline from current Trainiac: ~44% over engaged users</div></div>
+        <div class="m-cell"><div class="m-label">PMF: W4 retention</div><div class="m-val pending">Target ≥24%</div><div class="m-sub">All 5 gates required to proceed to Phase 2 (PT model)</div></div>
+        <div class="m-cell"><div class="m-label">Unit economics target</div><div class="m-val pending">≤$1 / active user</div><div class="m-sub">Current: $6.32. Competitor benchmark: ~$2 (Hevy / Gymnahtics)</div></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       PROJECT 2: T4T
   ══════════════════════════════════════════════════════════ -->
   <div class="project-section">
     <div class="project-header">
@@ -227,7 +299,7 @@
         <div class="cf-cell"><div class="cf-label">Engineering</div><div class="cf-status" style="color:var(--amber)">Testing</div><div class="cf-detail">4 modes Testing/Validating. BFF Pending Release. No dev blockers.</div><div class="cf-bar bar-partial"></div></div>
         <div class="cf-cell"><div class="cf-label">Comms</div><div class="cf-status" style="color:var(--amber)">⚠ Partial</div><div class="cf-detail">Comm Doc ✅ · Partnerships ✅ · CX ⏳ · Trainer announcement ⏳</div><div class="cf-bar bar-partial"></div></div>
         <div class="cf-cell"><div class="cf-label">Rollout</div><div class="cf-status" style="color:var(--magenta)">Lead trainers live</div><div class="cf-detail">~5% of trainer base. All-trainer blocked on CX comms + Android decision.</div><div class="cf-bar bar-partial"></div></div>
-        <div class="cf-cell"><div class="cf-label">Data / Analytics</div><div class="cf-status" style="color:var(--red)">⚠ Blocked</div><div class="cf-detail">Event catalog pending data team approval. iOS/Android implementation not started.</div><div class="cf-bar bar-none"></div></div>
+        <div class="cf-cell"><div class="cf-label">Data / Analytics</div><div class="cf-status" style="color:var(--red)">⚠ Blocked</div><div class="cf-detail">Event catalog pending DataVentures approval. Carlos + Marina still need to share Figma + req docs with DataVentures (open action from Jun 16 bi-weekly). iOS/Android implementation not started.</div><div class="cf-bar bar-none"></div></div>
         <div class="cf-cell"><div class="cf-label">CX / Support</div><div class="cf-status" style="color:var(--blue)">Pre-launch</div><div class="cf-detail">CX FAQ not shared yet. Expect questions once trainer rollout goes live.</div><div class="cf-bar bar-none"></div></div>
       </div>
       <div class="rollout-row">
@@ -241,9 +313,9 @@
       </div>
       <div class="pm-action">
         <div class="pm-action-label">PM action</div>
-        <div class="action-item">⚡ Send Comm Doc to CX before sprint ends</div>
-        <div class="action-item">⚡ Decide on Android deeplink: fix now or document and ship</div>
-        <div class="action-item">⚡ Follow up with data team on event catalog approval</div>
+        <div class="action-item">⚡ Send Comm Doc to CX before sprint ends · <a href="https://gympass.atlassian.net/issues/?jql=project%3DTRNC%20AND%20summary%20~%20%22comm%20doc%22%20AND%20status%20not%20in%20(Done%2CCancelled)" target="_blank">find in Jira</a><span class="eta eta-hot">by Jun 27 — sprint end</span></div>
+        <div class="action-item">⚡ Decide on Android deeplink: fix now or document and ship · <a href="https://gympass.atlassian.net/issues/?jql=project%3DTRNC%20AND%20summary%20~%20%22deeplink%22%20AND%20status%20not%20in%20(Done%2CCancelled)" target="_blank">find in Jira</a><span class="eta eta-hot">by Jun 27 — blocks all-trainer rollout</span></div>
+        <div class="action-item">⚡ Carlos + Marina: share Figma + req docs with DataVentures for event mapping · <a href="https://docs.google.com/document/d/1Pws6DJ5VQqCqod4wbCIEYhQhSAC_gluOhD0YOi-k1Y0/edit" target="_blank">Jun 16 bi-weekly</a><span class="eta eta-hot">by Jun 27 — open action from Jun 16</span></div>
       </div>
       <div class="metrics-row">
         <div class="m-cell"><div class="m-label">Feature adoption</div><div class="m-val pending">No data — events not instrumented</div><div class="m-sub">Target: % trainers opening completed view/week</div></div>
@@ -293,8 +365,8 @@
       </div>
       <div class="pm-action">
         <div class="pm-action-label">PM action</div>
-        <div class="action-item">⚡ Assign owners: TRNC-3187 (currency), TRNC-3191 (analytics), TRNC-3193 (ops)</div>
-        <div class="action-item">⚡ Start Payments comm doc this sprint</div>
+        <div class="action-item">⚡ Assign owners: <a href="https://gympass.atlassian.net/browse/TRNC-3187" target="_blank">TRNC-3187</a> (currency), <a href="https://gympass.atlassian.net/browse/TRNC-3191" target="_blank">TRNC-3191</a> (analytics), <a href="https://gympass.atlassian.net/browse/TRNC-3193" target="_blank">TRNC-3193</a> (ops)<span class="eta eta-hot">by Jun 27 — sprint end</span></div>
+        <div class="action-item">⚡ Start Payments comm doc this sprint · <a href="https://gympass.atlassian.net/browse/TRNC-3183" target="_blank">TRNC-3183 epic</a><span class="eta eta-warn">by Jun 27 — don't leave to last sprint</span></div>
       </div>
       <div class="metrics-row">
         <div class="m-cell"><div class="m-label">Payment view rate</div><div class="m-val pending">Not live</div><div class="m-sub">% trainers viewing payment history/week</div></div>
@@ -337,9 +409,9 @@
       </div>
       <div class="pm-action">
         <div class="pm-action-label">PM action</div>
-        <div class="action-item">⚡ Pull HIIT usage baseline from Metabase before committing to timeline</div>
-        <div class="action-item">⚡ Assign PM + engineering owner</div>
-        <div class="action-item">⚡ Define comms plan for trainers + subscribers before any removal</div>
+        <div class="action-item">⚡ Pull HIIT usage baseline from <a href="https://gympass.metabaseapp.com" target="_blank">Metabase</a> before committing to timeline<span class="eta eta-hot">by Jun 29 — sprint planning</span></div>
+        <div class="action-item">⚡ Assign PM + engineering owner · <a href="https://gympass.atlassian.net/issues/?jql=project%3DTRNC%20AND%20summary%20~%20%22HIIT%22%20AND%20status%20not%20in%20(Done%2CCancelled)" target="_blank">HIIT tickets in Jira</a><span class="eta eta-warn">by Jun 29 — to scope in next sprint</span></div>
+        <div class="action-item">⚡ Define comms plan for trainers + subscribers before any removal<span class="eta eta-warn">before any eng work starts</span></div>
       </div>
       <div class="metrics-row">
         <div class="m-cell"><div class="m-label">HIIT sessions / week</div><div class="m-val pending">Pull from Metabase — needed now</div><div class="m-sub">Sizes the comms impact before removal</div></div>
@@ -352,7 +424,7 @@
 
 
   <!-- ══════════════════════════════════════════════════════════
-       PROJECT 2: USER APP ANDROID
+       PROJECT 3: USER APP ANDROID
   ══════════════════════════════════════════════════════════ -->
   <div class="project-section">
     <div class="project-header">
@@ -391,8 +463,8 @@
       </div>
       <div class="pm-action">
         <div class="pm-action-label">Watch items</div>
-        <div class="action-item action-info">ℹ Check if TRNC-3168 (Retrofit refactor) is picked up this sprint — it's unassigned</div>
-        <div class="action-item action-info">ℹ Monitor Android crash rate when TRNC-3177 ships</div>
+        <div class="action-item action-info">ℹ Check if <a href="https://gympass.atlassian.net/browse/TRNC-3168" target="_blank">TRNC-3168</a> (Retrofit refactor) is picked up this sprint — it's unassigned<span class="eta eta-warn">Jun 29 — sprint planning</span></div>
+        <div class="action-item action-info">ℹ Monitor Android crash rate when <a href="https://gympass.atlassian.net/browse/TRNC-3177" target="_blank">TRNC-3177</a> ships<span class="eta eta-ok">imminent — Pending Release</span></div>
       </div>
       <div class="metrics-row">
         <div class="m-cell"><div class="m-label">Migration progress</div><div class="m-val">~80%</div><div class="m-sub">Screens migrated off Parse SDK</div></div>
@@ -413,7 +485,7 @@
 
 
   <!-- ══════════════════════════════════════════════════════════
-       PROJECT 3: USER APP iOS — FROZEN
+       PROJECT 4: USER APP iOS — FROZEN
   ══════════════════════════════════════════════════════════ -->
   <div class="project-section">
     <div class="project-header">
@@ -432,67 +504,23 @@
   </div>
 
 
-  <!-- ══════════════════════════════════════════════════════════
-       PROJECT 4: T2
-  ══════════════════════════════════════════════════════════ -->
-  <div class="project-section">
-    <div class="project-header">
-      <div class="project-label">T2 — AI Trainiac for Lower Tiers</div>
-      <span class="project-badge" style="background:var(--red-bg);color:var(--red)">⚠ Urgent — 5 weeks to test launch</span>
-      <div class="project-desc">AI-powered coaching for Bronze/below-Silver subscribers · Strategy in discussion</div>
-    </div>
-
-    <div class="init-card">
-      <div style="background:linear-gradient(135deg,var(--purple-dark) 0%,#2d1b5e 100%);padding:18px 22px 14px;color:white;">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
-          <div>
-            <div style="font-size:16px;font-weight:800;letter-spacing:-.3px;margin-bottom:5px">T2 — Strategy &amp; Launch Preparation</div>
-            <div style="font-size:12px;color:var(--purple-light)">Normal Trainiac: Silver plan and above only · T2: extends AI coaching to lower tiers</div>
-          </div>
-          <div style="background:var(--magenta);color:white;font-size:12px;font-weight:700;padding:5px 14px;border-radius:20px;white-space:nowrap;flex-shrink:0">Test launch: ~28/07/2026</div>
-        </div>
-      </div>
-      <div class="status-brief">
-        <p>T2 is a new AI-powered Trainiac product targeting subscribers below the Silver plan — a segment that currently has no access to Trainiac. The strategy is still being discussed. The planned test launch is in 5 weeks (~28 July 2026). There is no Jira project, no team assigned, no scope defined, and no comms plan. Given the 5-week window, strategy alignment and team formation need to happen this week. The iOS app freeze is directly related to this — iOS scope will depend on the T2 decision.</p>
-      </div>
-      <div class="cf-track">
-        <div class="cf-cell"><div class="cf-label">Strategy</div><div class="cf-status" style="color:var(--red)">⚠ In discussion</div><div class="cf-detail">Not finalised. 5-week window means decisions are needed this week.</div><div class="cf-bar bar-urgent"></div></div>
-        <div class="cf-cell"><div class="cf-label">Engineering</div><div class="cf-status" style="color:var(--red)">Not started</div><div class="cf-detail">No Jira project. No team assigned. Scope unknown until strategy confirmed.</div><div class="cf-bar bar-none"></div></div>
-        <div class="cf-cell"><div class="cf-label">Comms</div><div class="cf-status" style="color:var(--red)">Not started</div><div class="cf-detail">No GTM plan. Internal alignment + external launch comms both needed.</div><div class="cf-bar bar-none"></div></div>
-        <div class="cf-cell"><div class="cf-label">Data / Analytics</div><div class="cf-status" style="color:var(--red)">Not started</div><div class="cf-detail">No KPIs defined. Success metrics for the test launch need to be set now.</div><div class="cf-bar bar-none"></div></div>
-        <div class="cf-cell"><div class="cf-label">CX / Support</div><div class="cf-status" style="color:var(--red)">Not engaged</div><div class="cf-detail">CX will need training materials + FAQ before test launch. Not started.</div><div class="cf-bar bar-none"></div></div>
-      </div>
-      <div class="rollout-row">
-        <div class="rl-label">Rollout</div>
-        <div class="rl-stages">
-          <div class="rl-stage"><div class="rl-dot dot-urgent"></div>Strategy finalised</div>
-          <div class="rl-stage"><div class="rl-dot dot-pending"></div>Team + Jira setup</div>
-          <div class="rl-stage"><div class="rl-dot dot-pending"></div>Build</div>
-          <div class="rl-stage"><div class="rl-dot dot-pending"></div>Test launch (~28/07)</div>
-        </div>
-        <div class="rl-pct" style="color:var(--red)">0%</div>
-      </div>
-      <div class="pm-action">
-        <div class="pm-action-label">PM action — urgent this week</div>
-        <div class="action-item">⚡ Confirm T2 strategy with stakeholders — unblocks everything else</div>
-        <div class="action-item">⚡ Define test launch scope: what does "test" mean? Who are the test users?</div>
-        <div class="action-item">⚡ Assign engineering team + create Jira project</div>
-        <div class="action-item">⚡ Set KPIs for the test launch — what does success look like at 5 weeks?</div>
-        <div class="action-item">⚡ Clarify iOS app relationship to T2 — resume, merge, or redefine?</div>
-      </div>
-      <div class="metrics-row">
-        <div class="m-cell"><div class="m-label">Target users</div><div class="m-val pending">TBD — below Silver tier subscribers</div><div class="m-sub">Potential audience size: pull from Looker</div></div>
-        <div class="m-cell"><div class="m-label">Test launch KPI</div><div class="m-val pending">Not defined</div><div class="m-sub">Define before build starts — e.g. activation rate, D7 retention</div></div>
-        <div class="m-cell"><div class="m-label">Differentiation vs Trainiac</div><div class="m-val pending">Strategy TBD</div><div class="m-sub">What T2 offers vs standard Trainiac (Silver+)</div></div>
-        <div class="m-cell"><div class="m-label">iOS app status</div><div class="m-val pending">Frozen — depends on T2 decision</div><div class="m-sub">Scope TBD once strategy confirmed</div></div>
-      </div>
-    </div>
-  </div>
-
-
   <!-- CHANGELOG -->
   <div class="section-title">Changelog</div>
   <div class="changelog">
+    <div class="cl-entry">
+      <div class="cl-date">23/06/2026</div><div class="cl-dot"></div>
+      <div class="cl-body">
+        <div class="cl-title"><a href="https://docs.google.com/document/d/1pWEPr4BiIxMlCvosnZOTKMkAXQZL4mBlQ5MCbHCNIYs/edit?usp=drivesdk" target="_blank">T2 PLAN</a> <span class="cl-tag">T2</span></div>
+        <div class="cl-detail">Reunião definiu prazos, implementou framework Grill Me e estabeleceu fluxos de trabalho colaborativos para desenvolvimento ágil. · Planejamento e Framework · Equipe estabeleceu prazo de 1 mês para entrega de funcionalidade de treino. Implementou o framework Grill Me para definir problemas e critérios de sucesso individualmente. — Next steps: Agendar reunioes · Convidar participantes · Reescreve…</div>
+      </div>
+    </div>
+    <div class="cl-entry">
+      <div class="cl-date">23/06/2026</div><div class="cl-dot"></div>
+      <div class="cl-body">
+        <div class="cl-title">T2 card updated from strategy deck + calendar <span class="cl-tag">T2</span></div>
+        <div class="cl-detail">Read NV Town Hall deck (Jun 2026): vision, 6 product components, PMF gate metrics (5 thresholds), unit economics case ($6.32→≤$1). Calendar: T2 Kick-off Jun 24, T2 Solution Jun 26, DataVentures alignment Jun 30 surfaced as PM critical path.</div>
+      </div>
+    </div>
     <div class="cl-entry">
       <div class="cl-date">23/06/2026</div><div class="cl-dot"></div>
       <div class="cl-body">
