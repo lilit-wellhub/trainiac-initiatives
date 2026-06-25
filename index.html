@@ -173,11 +173,22 @@
       <div class="h-sub">T4T · Android · iOS · T2</div>
     </div>
   </div>
-  <div class="sync-info">
-    <div id="lastSync">Updated: 24/06/2026</div>
-    <a href="https://lilit-wellhub.github.io/trainiac-initiatives/" target="_blank">trainiac-initiatives ↗</a>
+  <div class="sync-info" style="display:flex;align-items:center;gap:12px">
+    <div id="lastSync">Updated: 25/06/2026</div>
+    <button id="syncBtn" onclick="triggerSync()" style="background:var(--magenta);color:white;border:none;border-radius:6px;padding:5px 12px;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:5px">
+      <span id="syncIcon">↻</span> Sync
+    </button>
   </div>
 </header>
+<script>
+function triggerSync() {
+  const btn = document.getElementById('syncBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Refreshing…';
+  // Hard reload bypassing cache — picks up latest GitHub Pages deployment
+  window.location.href = window.location.href.split('?')[0] + '?t=' + Date.now();
+}
+</script>
 
 <div class="container">
 
