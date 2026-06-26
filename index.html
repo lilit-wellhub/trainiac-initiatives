@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-deployed="20260626T115950" lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -8,13 +8,17 @@
   <meta http-equiv="Expires" content="0"/>
   <title>Trainiac — Weekly Status</title>
   <script>
-    // Force fresh content on every visit — prevent browser from showing yesterday's cached version
+    // On every load, silently fetch the page with no-store to get the server's latest version.
+    // If the deployed timestamp differs from what's rendered, reload to pick up new content.
     (function() {
-      var url = new URL(location.href);
-      if (!url.searchParams.has('_v')) {
-        url.searchParams.set('_v', Math.floor(Date.now() / 60000)); // changes every minute
-        location.replace(url.toString());
-      }
+      fetch(location.pathname, { cache: 'no-store' })
+        .then(function(r) { return r.text(); })
+        .then(function(html) {
+          var remote = (html.match(/data-deployed="([^"]+)"/) || [])[1];
+          var local  = (document.documentElement.getAttribute('data-deployed'));
+          if (remote && local && remote !== local) location.reload(true);
+        })
+        .catch(function(){});
     })();
   </script>
   <style>
@@ -256,12 +260,12 @@ function triggerSync() {
         <div class="rl-label">Rollout</div>
         <div class="rl-stages">
           <div class="rl-stage"><div class="rl-dot" style="background:var(--green);border-color:var(--green)"></div>Kick-off (24/06)</div>
-          <div class="rl-stage"><div class="rl-dot" style="background:var(--magenta);border-color:var(--magenta)"></div>Scope + team locked (26/06)</div>
-          <div class="rl-stage"><div class="rl-dot" style="background:transparent;border-color:#ccc"></div>Build (6 components)</div>
+          <div class="rl-stage"><div class="rl-dot" style="background:var(--green);border-color:var(--green)"></div>Scope + team locked (26/06)</div>
+          <div class="rl-stage"><div class="rl-dot" style="background:var(--magenta);border-color:var(--magenta)"></div>Build (6 components)</div>
           <div class="rl-stage"><div class="rl-dot" style="background:transparent;border-color:#ccc"></div>PMF test (~28/07)</div>
           <div class="rl-stage"><div class="rl-dot" style="background:transparent;border-color:#ccc"></div>Phase 2 — PT model</div>
         </div>
-        <div class="rl-pct" style="color:var(--red)">0%</div>
+        <div class="rl-pct" style="color:var(--red)">40%</div>
       </div>
       <div class="pm-action">
         <div class="pm-action-label">PM action — this week</div>
