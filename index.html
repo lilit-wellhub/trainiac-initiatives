@@ -3,7 +3,20 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
   <title>Trainiac — Weekly Status</title>
+  <script>
+    // Force fresh content on every visit — prevent browser from showing yesterday's cached version
+    (function() {
+      var url = new URL(location.href);
+      if (!url.searchParams.has('_v')) {
+        url.searchParams.set('_v', Math.floor(Date.now() / 60000)); // changes every minute
+        location.replace(url.toString());
+      }
+    })();
+  </script>
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
     :root{
@@ -248,7 +261,7 @@ function triggerSync() {
           <div class="rl-stage"><div class="rl-dot" style="background:transparent;border-color:#ccc"></div>PMF test (~28/07)</div>
           <div class="rl-stage"><div class="rl-dot" style="background:transparent;border-color:#ccc"></div>Phase 2 — PT model</div>
         </div>
-        <div class="rl-pct" style="color:var(--red)">20%</div>
+        <div class="rl-pct" style="color:var(--red)">0%</div>
       </div>
       <div class="pm-action">
         <div class="pm-action-label">PM action — this week</div>
@@ -312,7 +325,7 @@ function triggerSync() {
           <div class="rl-stage"><div class="rl-dot dot-active"></div>All trainers — this sprint</div>
           <div class="rl-stage"><div class="rl-dot dot-pending"></div>All subscribers</div>
         </div>
-        <div class="rl-pct">~5%</div>
+        <div class="rl-pct">~5%<!-- T4T rollout: lead trainers only --></div>
       </div>
       <div class="pm-action">
         <div class="pm-action-label">PM action</div>
