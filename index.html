@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-deployed="20260629T134453"  lang="en">
+<html data-deployed="20260629T135110"   lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -8,23 +8,21 @@
   <meta http-equiv="Expires" content="0"/>
   <title>Trainiac — Weekly Status</title>
   <script>
-    // Check GitHub API (bypasses CDN entirely) for a newer commit.
-    // If one exists, redirect with the commit SHA as a cache-buster so the CDN
-    // is forced to fetch fresh content from origin.
+    // Auto-refresh: fetch version.txt from raw.githubusercontent.com (bypasses GitHub Pages CDN).
+    // raw.githubusercontent.com has its own short-TTL CDN; appending ?_=<minute> ensures
+    // we get at most a 1-minute-stale read, which is fine for a morning dashboard.
+    // If the remote version is newer than data-deployed, hard-reload to get fresh HTML.
     (function() {
-      var local = document.documentElement.getAttribute('data-deployed');
-      var params = new URLSearchParams(location.search);
-      if (params.has('_c')) return; // already reloaded this commit, stop
-      fetch('https://api.github.com/repos/lilit-wellhub/trainiac-initiatives/commits/main', {cache:'no-store'})
-        .then(function(r){ return r.json(); })
-        .then(function(d) {
-          if (!d || !d.sha) return;
-          var remoteTs = d.commit && d.commit.author && d.commit.author.date || '';
-          // Compare: local is "20260626T115950", remoteTs is "2026-06-26T12:00:00Z"
-          var localNum  = local ? local.replace(/\D/g,'') : '0';
-          var remoteNum = remoteTs.replace(/\D/g,'').substring(0,14);
-          if (remoteNum > localNum) {
-            window.location.replace(location.pathname + '?_c=' + d.sha.substring(0,8));
+      var local = document.documentElement.getAttribute('data-deployed') || '0';
+      var minute = Math.floor(Date.now() / 60000);
+      fetch('https://raw.githubusercontent.com/lilit-wellhub/trainiac-initiatives/main/version.txt?_=' + minute, {cache:'no-store'})
+        .then(function(r){ return r.text(); })
+        .then(function(remote) {
+          remote = (remote || '').trim();
+          if (remote && remote !== local) {
+            // Force a true network fetch by appending the remote version as a query param.
+            // GitHub Pages CDN keys on path+query, so this is a new cache entry → origin fetch.
+            window.location.replace(location.pathname + '?_v=' + encodeURIComponent(remote));
           }
         })
         .catch(function(){});
